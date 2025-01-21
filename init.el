@@ -8,7 +8,7 @@
 (global-display-line-numbers-mode 1)
 (load-theme 'wombat t)
 
-(setq emacs-config-dir "$HOME/.config/emacs/")
+(setq emacs-config-dir "$HOME/.emacs.d/")
 
 ;; *Packages configuration
 
@@ -19,7 +19,11 @@
 (load-file (concat emacs-config-dir "packages.el"))
 
 
+;; My subjective coding configs
 
+(setq-default indent-tabs-mode nil
+	      tab-width 4)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; The annoying Custom variables I am too lazy to deal with
 ;; Ignoring highly advised
@@ -29,7 +33,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(magit org-mode)))
+ '(package-selected-packages
+   '(tree-sitter-langs tree-sitter treesit company company-mode evil magit org-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
