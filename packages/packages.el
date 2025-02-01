@@ -29,11 +29,7 @@
 
 (use-package eglot
   :ensure t
-  :defer t
-  :hook
-  ((js-ts-mode . eglot-ensure)
-   (tsx-ts-mode . eglot-ensure)
-   (typescript-ts-mode . eglot-ensure)))
+  :defer t)
 
 (use-package tree-sitter
   :ensure t
@@ -47,14 +43,20 @@
   :defer t
   :after tree-sitter)
 
-(use-package typescript-mode
-  :after tree-sitter
-  :config
-  (define-derived-mode typescriptreact-mode typescript-mode
-    "TypeScript TSX")
-  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescriptreact-mode))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(typescriptreact-mode . tsx)))
+(use-package dashboard
+  :ensure t
+  :config(dashboard-setup-startup-hook))
+
+(use-package projectile
+  :ensure t
+  :defer t
+  :after dashboard)
 
 (use-package company
   :ensure t
   :defer t)
+
+;; After load package config definitions
+
+(setq monkemacs-package-config "$HOME/.config/emacs/monkemacs/packages/")
+(load (concat monkemacs-package-config "./pkg-config-loader.el"))
