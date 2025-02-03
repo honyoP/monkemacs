@@ -9,7 +9,7 @@ usage() {
 }
 
 has_argument() {
-    [[ ("$1" == *=* && -n ${1#*=}) || ( ! -z "$2" && "$2" != -*)  ]];
+  [[ ("$1" == *=* && -n ${1#*=}) || (! -z "$2" && "$2" != -*) ]]
 }
 
 extract_argument() {
@@ -40,7 +40,17 @@ if [ "$verbose_mode" = true ]; then
   echo "Verbose mode enabled."
 fi
 
+MONKEY_PATH="$(dirname -- "${BASH_SOURCE[0]}")"
+FINAL_PATH="${MONKEY_PATH%/[^/]*}"
+MONKEY_PATH="$(cd -- "$MONKEY_PATH" && pwd)"
+FINAL_PATH="$(cd -- "$FINAL_PATH" && pwd)"
+
+if [[ -z "$MONKEY_PATH" ]]; then
+  exit 1
+fi
+
 if [ "$install" = true ]; then
-  mv init.el ../init.el
+  export MONKEMACS_CONFIG_PATH="$HOME/.config/emacs/"
+  mv $MONKEY_PATH"/init.el" $MONKEMACS_CONFIG_PATH
   echo "init.el was copied into the root dir :)"
 fi
