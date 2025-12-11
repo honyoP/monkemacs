@@ -2,3 +2,7 @@
 (setq dashboard-startup-banner "~/.config/emacs/monkemacs/packages/dashboard/logo.txt")
 (setq dashboard-center-content t)
 (setq dashboard-vertically-center-content t)
+(setq dashboard-items '((recents   . 5)
+                        (bookmarks . 5)
+                        (projects  . 5)
+                        (agenda    . 5)))
