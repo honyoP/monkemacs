@@ -73,10 +73,12 @@
   (monke-leader-key
    "SPC" '(execute-extended-command :which-key "M-x")
    "b"   '(:ignore t :which-key "buffer")
+   "bi"  '(ibuffer :which-key "iBuffer")
    "bb"  '(switch-to-buffer :which-key "switch buffer")
    "bk"  '(kill-current-buffer :which-key "kill buffer")
 
    "f"   '(:ignore t :which-key "files")
+   "fd"  '(dired-jump :which-key "dired jump")
    "ff"  '(find-file :which-key "find file")
    "fs"  '(save-buffer :which-key "save buffer")
 
@@ -125,9 +127,6 @@
   :defer t)
 
 ;; After load package config definitions
-
-(setq monkemacs-package-config "$HOME/.config/emacs/monkemacs/packages/")
-(load (concat monkemacs-package-config "./pkg-config-loader.el"))
 
 (provide 'packages)
 

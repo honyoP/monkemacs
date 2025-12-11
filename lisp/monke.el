@@ -35,7 +35,7 @@
   (add-to-list 'load-path emacs-config-dir)
   (require 'use-package))
 
-(load "~/.config/emacs/monkemacs/packages/packages.el")
+(require 'packages)
 
 
 ;; My subjective coding configs
