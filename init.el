@@ -1,5 +1,5 @@
 (setq emacs-config-dir "$HOME/.config/emacs/")
 (add-to-list 'load-path "~/.config/emacs/lisp")
-(let ((default-directory "~/.config/emacs/lisp"))
+(let ((default-directory "~/.config/emacs/lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
 (require 'monke)

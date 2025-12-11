@@ -71,21 +71,30 @@
 			  :prefix "SPC"
 			  :global-prefix "C-SPC")
   (monke-leader-key
-   "SPC" '(execute-extended-command :which-key "M-x")
+   "SPC" '(projectile-find-file :which-key "projectile find file")
    "b"   '(:ignore t :which-key "buffer")
    "bi"  '(ibuffer :which-key "iBuffer")
-   "bb"  '(switch-to-buffer :which-key "switch buffer")
+   "bb"  '(consult-buffer :which-key "switch buffer")
    "bk"  '(kill-current-buffer :which-key "kill buffer")
+
+   "["   '(previous-buffer :which-key "previous buffer")
+   "]"   '(next-buffer :which-key "next buffer")
 
    "f"   '(:ignore t :which-key "files")
    "fd"  '(dired-jump :which-key "dired jump")
    "ff"  '(find-file :which-key "find file")
+   "fr"  '(consult-recent-file :which-key "recent files")
    "fs"  '(save-buffer :which-key "save buffer")
+
+   "p"   '(:ignore t :which-key "projectile")
+   "pa"  '(projectile-add-known-project :which-key "add project")
+   "po"  '(projectile-switch-project :which-key "open project")
 
    "g"   '(:ignore t :which-key "git")
    "gg"  '(magit-status :which-key "git status")
 
    "m"   '(:ignore t :which-key "+localmodifier")
+   "mx" '(execute-extended-command :which-key "M-x")
    "me"  '(eval-region :which-key "evaluate region")
 
    "w"   '(:ignore t :which-key "window")
@@ -126,7 +135,41 @@
   :ensure t
   :defer t)
 
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+  :config
+  (setq vertico-cycle t))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion--styles '(orderless basic))
+  (completion--category-override '((file (style basic partial-completion)))))
+
+(use-package marginalia
+  :ensure t
+  :after vertico
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy
+                           marginalia-annotators-light nil))
+  :init
+  (marginalia-mode))
+
+(use-package consult
+  :ensure t
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :init
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+
+  (global-set-key (kbd "C-s") 'consult-line)
+  (global-set-key (kbd "M-y") 'consult-yank-pop))
+
 ;; After load package config definitions
+
+(require 'pkg-config-loader)
 
 (provide 'packages)
 
