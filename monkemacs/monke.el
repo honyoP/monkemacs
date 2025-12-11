@@ -1,4 +1,23 @@
-
+;;; monke.el --- Simple assortment of my favourite packages -*- lexical-binding: t; -*-
+;;
+;; Copyright (C) 2025
+;;
+;; Author:  <honyo@froggy>
+;; Maintainer:  <honyo@froggy>
+;; Created: December 11, 2025
+;; Modified: December 11, 2025
+;; Version: 0.0.1
+;; Keywords: abbrev bib c calendar comm convenience data docs emulations extensions faces files frames games hardware help hypermedia i18n internal languages lisp local maint mail matching mouse multimedia news outlines processes terminals tex text tools unix vc wp
+;; Homepage: https://github.com/honyo/early-init
+;; Package-Requires: ((emacs "30.2"))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; Commentary:
+;;
+;;  Description
+;;
+;;; Code:
 ;; The necessary de-uglification of vanilla Emacs install
 (setq inhibit-startup-message t
       make-backup-files nil)
@@ -16,7 +35,7 @@
   (add-to-list 'load-path emacs-config-dir)
   (require 'use-package))
 
-(load-file (concat emacs-config-dir "./monkemacs/packages/packages.el"))
+(load "~/.config/emacs/monkemacs/packages/packages.el")
 
 
 ;; My subjective coding configs
@@ -41,3 +60,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide 'monke)
+
+;;; monke.el ends here
